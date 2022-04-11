@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 #include <string.h>
 #include "List.h"
 #include "Iterators.h"
@@ -38,7 +38,7 @@ void move_backward(Iterators *&iter) {
 void add_before(Iterators *&iter) {
     char x[3];
     unsigned long long int y;
-    scanf("%3s %llu",x, &y);
+    scanf("%3s %llui",x, &y);
     if(iter == nullptr)
         iter = new Iterators(new List(y));
     else {
@@ -49,7 +49,7 @@ void add_before(Iterators *&iter) {
 void add_after(Iterators *&iter) {
     char x[3];
     unsigned long long int y;
-    scanf("%3s %llu",x, &y);
+    scanf("%3s %llui",x, &y);
     if(iter == nullptr)
         iter = new Iterators(new List(y));
     else {
@@ -66,7 +66,7 @@ void print(Iterators *&iter) {
         else
             (*iter)[p]->print();
     }
-    printf("\n");
+    cout<<'\n';
 }
 void remove(Iterators *&iter) {
     char x[3];
