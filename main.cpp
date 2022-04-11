@@ -208,17 +208,7 @@ void remove(iterators *&iter) {
     char x[4];
     scanf("%s",x);
     List* list = (*iter)[x];
-    //chyba można usunąć
-    //check_pos(list,iter,x);
 
-
-    bool same[ITERATORS+2];
-    for(char i = '0'; i < char(ITERATORS+'0'); i++) {
-        if(list == (*iter)[new char(i)])
-            same[i-'0'] = true;
-        else
-            same[i-'0'] = false;
-    }
     if((*iter)["BEG"] == (*iter)["END"])
         iter = nullptr;
     else if(!strcmp(x,"END"))
@@ -235,17 +225,22 @@ void remove(iterators *&iter) {
             iter->set(x,list->get_next());
         else
             iter->set(x,list->get_prev());
-        //iter->set(x,(*iter)[x]);
     }
 
 
-
+    if(iter != nullptr) {
         List* saved = (*iter)[x];
-        for(int i = 0; i < ITERATORS && iter != nullptr; i++) {
-            if(same[i] == true)
+        for(int i = 0; i < ITERATORS; i++) {
+            if(list == (*iter)[new char(i+'0')])
                 iter->set(new char(i+'0'),saved);
         }
+        if(list == (*iter)["BEG"])
+            iter->set_beg(saved);
+        if(list == (*iter)["END"] )
+            iter->set_end(saved);
+    }
     list->remove(list);
+    update(iter);
 }
 void distribute (OPERATIONS operation, iterators *&iter){
     switch(operation) {
