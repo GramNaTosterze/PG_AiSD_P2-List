@@ -176,7 +176,7 @@ void add_before(iterators *&iter) {
     if(iter == nullptr)
         iter = new iterators(new List(y));
     else {
-        check_pos((*iter)[x],iter,x);
+        //check_pos((*iter)[x],iter,x);
         (*iter)[x]->add_before(y);
         update(iter);
     }
@@ -188,7 +188,7 @@ void add_after(iterators *&iter) {
     if(iter == nullptr)
         iter = new iterators(new List(y));
     else {
-        check_pos((*iter)[x],iter,x);
+        //check_pos((*iter)[x],iter,x);
         (*iter)[x]->add_after(y);
         update(iter);
     }
@@ -208,7 +208,8 @@ void remove(iterators *&iter) {
     char x[4];
     scanf("%s",x);
     List* list = (*iter)[x];
-    check_pos(list,iter,x);
+    //chyba można usunąć
+    //check_pos(list,iter,x);
 
 
     bool same[ITERATORS+2];
@@ -227,12 +228,14 @@ void remove(iterators *&iter) {
     else {
         if(list->get_next() == nullptr && list->get_prev() == nullptr) {
             iter->set(x,nullptr);
+            delete iter;
+            iter = nullptr;
         }
         else if(list->get_next() != nullptr)
             iter->set(x,list->get_next());
         else
             iter->set(x,list->get_prev());
-        iter->set(x,(*iter)[x]);
+        //iter->set(x,(*iter)[x]);
     }
 
 
@@ -292,7 +295,5 @@ int main () {
 
         distribute(OPERATIONS(operation[0]),it);
     }
-    //list->dest();
-    //delete list;
     return 0;
 }
