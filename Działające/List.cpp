@@ -1,11 +1,11 @@
-#include <iostream>
+#include <stdio.h>
 #include "List.h"
 
 using namespace std;
 
-List::List(unsigned long long data): data(data),  next(nullptr), prev(nullptr) {}
-List::List(unsigned long long data, List* prev) : data(data), next(nullptr), prev(prev){}
-List::List(unsigned long long data, List* prev, List* next) : data(data), next(next), prev(prev){}
+List::List(unsigned long long data): List(data,nullptr,nullptr) {}
+List::List(unsigned long long data, List* prev): List(data,prev,nullptr) {}
+List::List(unsigned long long data, List* prev, List* next): data(data), next(next), prev(prev){}
 
 List* List::get(char *index) {
     int iter;
@@ -60,12 +60,12 @@ void List::remove(List *&list) {
     list = nullptr;
 }
 void List::print() const{
-    cout<<this->data;
+    printf("%llu",this->data);
 }
 void List::print_all(){
     List *tmp = this;
     while(tmp != nullptr) {
-        cout<<tmp->data<<" ";
+        printf("%llu ",tmp->data);
         tmp = tmp->next;
     }
 }

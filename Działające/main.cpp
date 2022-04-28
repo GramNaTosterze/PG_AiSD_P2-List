@@ -1,4 +1,4 @@
-#include <iostream>
+#include <stdio.h>
 #include <string.h>
 #include "List.h"
 #include "Iterators.h"
@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//utrzymywanie iteratorów początku i końca na swoich miejscach
 void update(Iterators *&iter) {
     List *prev = (*iter)["BEG"]->get_prev(), *next = (*iter)["END"]->get_next();
     if(prev != nullptr)
@@ -14,7 +15,7 @@ void update(Iterators *&iter) {
         iter->set_end(next);
 }
 void initialize_ith_iterator(Iterators *&iter) {
-    char x[3], y[3];
+    char x[4], y[4];
     scanf("%3s %3s",x,y);
     if(!strcmp(y,"BEG") || !strcmp(y,"END"))
         iter->set(x, (*iter)[y]);
@@ -22,23 +23,23 @@ void initialize_ith_iterator(Iterators *&iter) {
         iter->set(x, (*iter)["BEG"]->get(x));
 }
 void move_forward(Iterators *&iter) {
-    char x[3];
+    char x[4];
     scanf("%3s",x);
     List *next = (*iter)[x]->get_next();
     if(next != nullptr)
         iter->set(x,next);
 }
 void move_backward(Iterators *&iter) {
-    char x[3];
+    char x[4];
     scanf("%3s",x);
     List *prev = (*iter)[x]->get_prev();
     if(prev != nullptr)
         iter->set(x, prev);
 }
 void add_before(Iterators *&iter) {
-    char x[3];
+    char x[4];
     unsigned long long int y;
-    scanf("%3s %llui",x, &y);
+    scanf("%3s %llu",x, &y);
     if(iter == nullptr)
         iter = new Iterators(new List(y));
     else {
@@ -47,9 +48,9 @@ void add_before(Iterators *&iter) {
     }
 }
 void add_after(Iterators *&iter) {
-    char x[3];
+    char x[4];
     unsigned long long int y;
-    scanf("%3s %llui",x, &y);
+    scanf("%3s %llu",x, &y);
     if(iter == nullptr)
         iter = new Iterators(new List(y));
     else {
@@ -58,7 +59,7 @@ void add_after(Iterators *&iter) {
     }
 }
 void print(Iterators *&iter) {
-    char p[3];
+    char p[4];
 	scanf("%3s", p);
     if(iter != nullptr) {
         if(!strcmp(p,"ALL"))
@@ -66,10 +67,10 @@ void print(Iterators *&iter) {
         else
             (*iter)[p]->print();
     }
-    cout<<'\n';
+    printf("\n");
 }
 void remove(Iterators *&iter) {
-    char x[3];
+    char x[4];
     scanf("%3s",x);
     List* list = (*iter)[x];
 
@@ -145,10 +146,10 @@ void distribute (OPERATIONS operation, Iterators *&iter){
 }
 
 int main () {
-    char operation[2];
+    char operation[3];
     Iterators *it = nullptr;
     while(true) {
-        scanf("%3s", operation);
+        scanf("%2s", operation);
         if(feof(stdin)!=0)
             break;
 
